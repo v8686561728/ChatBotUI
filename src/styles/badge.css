@@ -1,0 +1,69 @@
+/*Badge Styles*/
+.ant-badge {
+    margin-bottom: 6px;
+  }
+  .ant-badge:not(:last-child) {
+    margin-right: 12px;
+  }
+  .ant-tag {
+    margin-bottom: 8px;
+  }
+  .gx-badge {
+    display: inline-block;
+    padding: 5px 8px 4px;
+    font-size: 75%;
+    margin-bottom: 6px;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+  }
+  .gx-badge:not(:last-child) {
+    margin-right: 12px;
+  }
+  .gx-chat-date .gx-badge {
+    margin-bottom: 0;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 16px;
+    padding: 2px;
+  }
+  .gx-user-thumb .gx-badge {
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    z-index: 1;
+    margin: 0;
+    display: block;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    line-height: 16px;
+  }
+  .gx-badge-outline {
+    background-color: transparent;
+    border: solid 1px #e8e8e8;
+  }
+  .gx-badge-radius-sm .ant-badge-count {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+  }
+  #components-back-top-demo-custom .ant-back-top {
+    bottom: 100px;
+  }
+  #components-back-top-demo-custom .ant-back-top-inner {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    background-color: #1088e9;
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+  }
+  

@@ -1,0 +1,139 @@
+
+
+
+/*Avatar Styles*/
+.gx-avatar-img {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: solid 1px #e8e8e8;
+  }
+  .gx-avatar-img-lg {
+    height: 100px;
+    width: 100px;
+  }
+  .ant-avatar {
+    position: relative;
+  }
+  .ant-avatar.gx-size-150 > * {
+    line-height: 150px;
+  }
+  .ant-avatar.gx-size-120 > * {
+    line-height: 120px;
+  }
+  .ant-avatar.gx-size-100 > * {
+    line-height: 100px;
+  }
+  .ant-avatar.gx-size-80 > * {
+    line-height: 80px;
+  }
+  .ant-avatar.gx-size-60 > * {
+    line-height: 60px;
+  }
+  .ant-avatar.gx-size-50 > * {
+    line-height: 50px;
+  }
+  .ant-avatar.gx-size-40 > * {
+    line-height: 40px;
+  }
+  .ant-avatar.gx-size-36 > * {
+    line-height: 36px;
+  }
+  .ant-avatar.gx-size-30 > * {
+    line-height: 30px;
+  }
+  .ant-avatar.gx-size-24 > * {
+    line-height: 24px;
+  }
+  .ant-avatar.gx-size-20 > * {
+    line-height: 20px;
+  }
+  .ant-avatar.gx-size-15 > * {
+    line-height: 14px;
+  }
+  .gx-customers-list .ant-avatar {
+    width: 70px;
+    height: 70px;
+  }
+  @media (max-width: 1500px) {
+    .gx-customers-list .ant-avatar {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  @media (max-width: 1366px) {
+    .gx-customers-list .ant-avatar {
+      width: 48px;
+      height: 48px;
+    }
+  }
+  @media (max-width: 1199px) {
+    .gx-customers-list .ant-avatar {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .gx-customers-list .ant-avatar {
+      width: 52px;
+      height: 52px;
+    }
+  }
+  .gx-avatar {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -ms-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    overflow: hidden;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: solid 1px #e8e8e8;
+  }
+  @media screen and (max-width: 991px) {
+    .gx-user-nav .gx-avatar {
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+    }
+  }
+  @media screen and (max-width: 575px) {
+    .gx-user-nav .gx-avatar {
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
+    }
+  }
+  .gx-header-horizontal-main .gx-avatar {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+  }
+  @media screen and (max-width: 991px) {
+    .gx-header-horizontal-main .gx-avatar {
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
+    }
+  }
+  .gx-user-thumb {
+    position: relative;
+  }

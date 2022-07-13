@@ -396,24 +396,9 @@
     width: 100%;
     box-shadow: rgb(80 80 80 / 10%) 0px 5px 15px 0px;
     border-radius: 10px;
-  }
-
-  .gx-chat-main-header-info {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: -ms-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-align-items: center;
-    -ms-align-items: center;
-    align-items: center;
     margin-right: auto;
   }
+
   .gx-chat-contact-name {
     font-size: 10px;
     opacity: 0.6;

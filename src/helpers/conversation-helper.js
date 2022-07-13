@@ -1,3 +1,4 @@
+// helps convert the server provided data to a conversation array
 export const generateConveration = (preMessage, currentMessage) => {
   let conversation = [];
   preMessage && preMessage.forEach((message) => {

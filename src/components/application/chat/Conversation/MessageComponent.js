@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import parse from "html-react-parser";
-import { Button, Input } from "antd";
-import {LeftOutlined ,RightOutlined ,CheckOutlined ,SendOutlined} from "@ant-design/icons";
+import { Input } from "antd";
+import { CheckOutlined, SendOutlined } from "@ant-design/icons";
 import { timeAgo } from "../../../../helpers/date-helper";
-const Search = Input.Search;
 
 const MessageComponent = ({ data, conversation }) => {
   const { handleOptionClick, handleInputSubmit } = data;
   const [readOnly, setReadOnly] = useState(false);
   const [error, setError] = useState("");
-  const [value,setValue]=useState('')
-  const handleChange = (e)=>{
-    e.preventDefault()
-    setValue(e.target.value)
-  }
+  const [value, setValue] = useState("");
+  const handleChange = (e) => {
+    e.preventDefault();
+    setValue(e.target.value);
+  };
   const onOptionClick = (conversation, e) => {
     e.preventDefault();
     handleOptionClick(conversation);
@@ -28,6 +27,7 @@ const MessageComponent = ({ data, conversation }) => {
     }
   };
 
+  // input validation 
   const validateInput = (conversation) => {
     let regexp = "";
     switch (conversation.key) {
@@ -65,24 +65,23 @@ const MessageComponent = ({ data, conversation }) => {
         </div>
       );
     case "input":
-      // return (
-      // <div>
-      //   <div className="input-label"></div>
-      //   <div className="input-container">
-      //     <form>
-      //       <label></label>
-      //       <Input onChange={handleChange} addonAfter={readOnly?<CheckOutlined />:<SendOutlined onClick={handleInput}/>}></Input>
-      //     </form>
-      //   </div>
-      // </div>
-      // );
       return (
         <div className="gx-bubble-block">
           <div className="gx-bubble">
             <div className="gx-input-label">{conversation.text}</div>
-        
-                <Input onChange={handleChange} readOnly={readOnly} addonAfter={readOnly?<CheckOutlined />:<SendOutlined onClick={handleInput}/>}></Input>
-               
+
+            <Input
+              onChange={handleChange}
+              readOnly={readOnly}
+              addonAfter={
+                readOnly ? (
+                  <CheckOutlined />
+                ) : (
+                  <SendOutlined onClick={handleInput} />
+                )
+              }
+            ></Input>
+
             <span className="error" data-testid="error">
               {error}
             </span>
@@ -108,6 +107,7 @@ const MessageComponent = ({ data, conversation }) => {
 
 MessageComponent.propTypes = {
   data: PropTypes.object,
+  conversation: PropTypes.object,
 };
 
 export default MessageComponent;

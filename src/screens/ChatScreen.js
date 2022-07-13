@@ -29,11 +29,11 @@ const Conversation = React.lazy(() =>
 
 const ChatScreen = () => {
   const [chatOpen, setChatOpen] = useState(false); // controls modal open/close
-  const messagesEndRef = useRef();
-  const [conversationLoading, setConversationLoading] = useState(false);
-  const [isSubScriptionComplete, setIsSubScriptionComplete] = useState(false);
+  const messagesEndRef = useRef(); // reference to scroll to bottom of the messages
+  const [conversationLoading, setConversationLoading] = useState(false); // loader to wait for server meaages
+  const [isSubScriptionComplete, setIsSubScriptionComplete] = useState(false); // to check is channel subscription is complete to trigger the events
   const dispatch = useDispatch();
-  const conversationData = useSelector((state) => getConversation(state));
+  const conversationData = useSelector((state) => getConversation(state)); 
   const userId = useSelector((state) => getUserId(state));
   const { settings, popupMessage } = useSelector((state) =>
     getInitialData(state)
@@ -41,27 +41,31 @@ const ChatScreen = () => {
   const channelId = useSelector((state) => getChannelId(state));
   const channel = useSelector((state) => getChannel(state));
   const loading = useSelector((state) => isLoading(state));
+
+  // getting inital data of conversation
   useEffect(() => {
-    const user = getCookie("user-id");
-    dispatch(createChannel(user)); // user id creation / channel id creation
+    const user = getCookie("user-id"); // to retrive previous message of the conversation
+    dispatch(createChannel(user)); // pusher channel creation
   }, []);
   useEffect(() => {
-    setCookie("user-id", userId);
+    setCookie("user-id", userId); // saving the user id in cookies
   }, [userId]);
 
   useEffect(() => {
-    // server event is binded with the client
-
+    // check if subscription is complete to trigger the events
     if (channel) {
       channel.bind("pusher:subscription_succeeded", () => {
         setIsSubScriptionComplete(true);
       });
     }
   }, [channel]);
+
+  // scroll to bottom of the conversation
   useEffect(() => {
     messagesEndRef && messagesEndRef.current && messagesEndRef.current.scrollIntoView({ block: 'end', behavior: 'smooth' })
   }, [conversationData]);
 
+  // Binding client and server events
   useEffect(() => {
     if (isSubScriptionComplete) {
       if (conversationData.length == 1) {
@@ -174,6 +178,7 @@ const ChatScreen = () => {
     setChatOpen(value);
   };
 
+  // resets the conversation
   const handleReset = () => {
     let timeStamp = new Date().getTime();
     const eventData = {
@@ -209,14 +214,7 @@ const ChatScreen = () => {
             <Suspense fallback={<>Loading...</>}>
               <div className="gx-chat-container">
                 <div className="gx-chat-main-header">
-                  <span className="gx-d-block gx-d-lg-none gx-chat-btn">
-                    <i
-                      className="gx-icon-btn icon icon-chat"
-                      //  onClick={this.onToggleDrawer.bind(this)}
-                    />
-                  </span>
-                  <div className="gx-chat-main-header-info">
-                    <div className="gx-chat-avatar gx-mr-2">
+                    <div className=" gx-chat-avatar gx-mr-2">
                       <div
                         className="gx-status-pos"
                         style={
@@ -239,7 +237,6 @@ const ChatScreen = () => {
                         You are chatting with {settings && settings.bot.name}
                       </div>
                     </div>
-                  </div>
                 </div>
                 <div>
                   <CustomScrollbars className="gx-chat-list-scroll">

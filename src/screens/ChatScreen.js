@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect, useRef } from "react";
 import { Avatar } from "antd";
-import { RedoOutlined } from "@ant-design/icons";
+import { RedoOutlined ,LoadingOutlined} from "@ant-design/icons";
 import parse from "html-react-parser";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/chatScreen.css";
@@ -74,7 +74,6 @@ const ChatScreen = () => {
       }
       channel.bind("server-message", (data) => {
         const result = generateConveration([], data.messages);
-        console.log(result);
         dispatch(addMessageToConversation(result));
         const { component } =
           result.length > 0 ? result.pop() : { component: "" };
@@ -241,6 +240,7 @@ const ChatScreen = () => {
                       handleInputSubmit={handleInputSubmit}
                       handleOptionClick={handleOptionClick}
                     />
+                    <LoadingOutlined />
                      <div ref={messagesEndRef} />
                   </CustomScrollbars>
                  

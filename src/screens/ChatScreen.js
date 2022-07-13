@@ -1,6 +1,6 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect, useRef } from "react";
 import { Avatar } from "antd";
-import {RedoOutlined} from "@ant-design/icons";
+import { RedoOutlined } from "@ant-design/icons";
 import parse from "html-react-parser";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/chatScreen.css";
@@ -16,7 +16,7 @@ import {
   getConversation,
   getInitialData,
   getUserId,
-  isLoading
+  isLoading,
 } from "../redux/chat/chat-selectors";
 import { getCookie, setCookie } from "../helpers/cookies-helper";
 import { generateConveration } from "../helpers/conversation-helper";
@@ -29,6 +29,7 @@ const Conversation = React.lazy(() =>
 
 const ChatScreen = () => {
   const [chatOpen, setChatOpen] = useState(false); // controls modal open/close
+  const messagesEndRef = useRef();
   const [isSubScriptionComplete, setIsSubScriptionComplete] = useState(false);
   const dispatch = useDispatch();
   const conversationData = useSelector((state) => getConversation(state));
@@ -56,6 +57,9 @@ const ChatScreen = () => {
       });
     }
   }, [channel]);
+  useEffect(() => {
+    messagesEndRef && messagesEndRef.current && messagesEndRef.current.scrollIntoView({ block: 'end', behavior: 'smooth' })
+  }, [conversationData]);
 
   useEffect(() => {
     if (isSubScriptionComplete) {
@@ -185,94 +189,103 @@ const ChatScreen = () => {
     dispatch(addMessageToConversation(message));
     channel.trigger("client-widget-message", eventData);
   };
-  return !loading && (
-    <div className={chatOpen ? "gx-chat-main" : "gx-right-corner"}>
-      {chatOpen && (
-        <span className="gx-close" onClick={(e) => handleChatOpen(false, e)}>
-          X
-        </span>
-      )}
-      {chatOpen ? (
-        <div className="container">
-          <Suspense fallback={<>Loading...</>}>
-            <div className="gx-chat-container">
-              <div className="gx-chat-main-header">
-                <span className="gx-d-block gx-d-lg-none gx-chat-btn">
-                  <i
-                    className="gx-icon-btn icon icon-chat"
-                    //  onClick={this.onToggleDrawer.bind(this)}
-                  />
-                </span>
-                <div className="gx-chat-main-header-info">
-                  <div className="gx-chat-avatar gx-mr-2">
-                    <div
-                      className="gx-status-pos"
-                      style={
-                        settings && {
-                          backgroundColor: settings.color.headerBackgroundColor,
+  return (
+    !loading && (
+      <div className={chatOpen ? "gx-chat-main" : "gx-right-corner"}>
+        {chatOpen && (
+          <span className="gx-close" onClick={(e) => handleChatOpen(false, e)}>
+            X
+          </span>
+        )}
+        {chatOpen ? (
+          <div className="container">
+            <Suspense fallback={<>Loading...</>}>
+              <div className="gx-chat-container">
+                <div className="gx-chat-main-header">
+                  <span className="gx-d-block gx-d-lg-none gx-chat-btn">
+                    <i
+                      className="gx-icon-btn icon icon-chat"
+                      //  onClick={this.onToggleDrawer.bind(this)}
+                    />
+                  </span>
+                  <div className="gx-chat-main-header-info">
+                    <div className="gx-chat-avatar gx-mr-2">
+                      <div
+                        className="gx-status-pos"
+                        style={
+                          settings && {
+                            backgroundColor:
+                              settings.color.headerBackgroundColor,
+                          }
                         }
+                      >
+                        <Avatar
+                          src={settings && settings.bot.img}
+                          className="gx-rounded-circle gx-size-60"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div>{settings && settings.bot.company}</div>
+                      <div className="gx-chat-contact-name">
+                        You are chatting with {settings && settings.bot.name}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <CustomScrollbars className="gx-chat-list-scroll">
+                    <Conversation
+                      conversationData={conversationData}
+                      handleInputSubmit={handleInputSubmit}
+                      handleOptionClick={handleOptionClick}
+                    />
+                     <div ref={messagesEndRef} />
+                  </CustomScrollbars>
+                 
+                  <div
+                    className="gx-chat-main-footer"
+                    style={
+                      settings && {
+                        backgroundColor: settings.color.headerBackgroundColor,
                       }
-                    >
-                      <Avatar
-                        src={settings && settings.bot.img}
-                        className="gx-rounded-circle gx-size-60"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div>{settings && settings.bot.company}</div>
-                    <div className="gx-chat-contact-name">
-                      You are chatting with {settings && settings.bot.name}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-              <CustomScrollbars className="gx-chat-list-scroll">
-                <Conversation
-                  conversationData={conversationData}
-                  handleInputSubmit={handleInputSubmit}
-                  handleOptionClick={handleOptionClick}
-                />
-              
-              </CustomScrollbars>
-              <div className="gx-chat-main-footer"    style={
-                        settings && {
-                          backgroundColor: settings.color.headerBackgroundColor,
-                        }
-                      }>
-                <div className="gx-flex-row gx-align-items-center">
-                  <div className="gx-col">
-                    <div className="gx-form-group gx-restart" onClick={handleReset}>
-                    <RedoOutlined />  Restart conversation
+                    }
+                  >
+                    <div className="gx-flex-row gx-align-items-center">
+                      <div className="gx-col">
+                        <div
+                          className="gx-form-group gx-restart"
+                          onClick={handleReset}
+                        >
+                          <RedoOutlined /> Restart conversation
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-         
-              </div>
-            </div>
-          </Suspense>
-        </div>
-      ) : (
-        <div
-          className="popup-container"
-          onClick={(e) => handleChatOpen(true, e)}
-        >
-          <div className="popup-wrapper">
-            <div className="popup-message">
-              {popupMessage && parse(popupMessage.message)}
-            </div>
-            <Avatar
-              src={settings && settings.bot.img}
-              className="gx-rounded-circle gx-size-60 "
-              alt=""
-            />
+            </Suspense>
           </div>
-        </div>
-      )}
-    </div>
+        ) : (
+          <div
+            className="popup-container"
+            onClick={(e) => handleChatOpen(true, e)}
+          >
+            <div className="popup-wrapper">
+              <div className="popup-message">
+                {popupMessage && parse(popupMessage.message)}
+              </div>
+              <Avatar
+                src={settings && settings.bot.img}
+                className="gx-rounded-circle gx-size-60 "
+                alt=""
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    )
   );
 };
 

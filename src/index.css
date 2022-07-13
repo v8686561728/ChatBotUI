@@ -29922,6 +29922,55 @@ h6,
 }
 
 .error{
-  padding: 25px;
   color: red;
+}
+.button-option{
+  -webkit-box-align: center;
+    align-items: center;
+    padding: 10px 20px;
+    max-width: 215px;
+    text-align: left;
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    background-color: rgb(237, 240, 247);
+    border: 1px solid rgb(130, 56, 244);
+    box-sizing: border-box;
+    border-radius: 15px;
+    color: rgb(47, 60, 78);
+    display: inline-flex;
+    margin-right: 10px;
+    transition: background 0.2s ease 0s;
+}
+
+.gx-icon-btn {
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  cursor: pointer;
+}
+.gx-icon-btn:focus,
+.gx-icon-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.icon-sent:before {
+  content: "\e074";
 }

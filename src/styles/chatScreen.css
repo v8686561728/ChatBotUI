@@ -128,6 +128,7 @@
     overflow-y: scroll !important;
   }
   .gx-chat-list-scroll {
+    overflow: hidden;
     height: calc(100vh - 268px) !important;
   }
   .framed-layout .gx-chat-list-scroll {
@@ -394,16 +395,7 @@
     box-shadow: rgb(80 80 80 / 10%) 0px 5px 15px 0px;
     border-radius: 10px;
   }
-  @media screen and (max-width: 1199px) {
-    .gx-chat-main-header {
-      padding: 8px 16px;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .gx-chat-main-header {
-      padding: 8px 30px;
-    }
-  }
+
   .gx-chat-main-header-info {
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -450,11 +442,11 @@
     flex-wrap: nowrap;
     border-top: solid 1px #e8e8e8;
     padding: 6px 16px;
-    background-color: #ffffff;
     width: 100%;
-    border-radius: 25px;
-    background-color: rgb(130, 56, 244);
+    border-bottom-left-radius: 10px; 
+    border-bottom-right-radius: 10px; 
     text-align: center;
+    
   }
   .gx-chat-main-footer .gx-form-group {
     margin-bottom: 0;
@@ -644,4 +636,8 @@
     height: 53px;
     width: 53px;
     border-radius: 30px;
+  }
+  .gx-restart{
+    opacity: 0.5;
+    font-size: 15px !important;
   }

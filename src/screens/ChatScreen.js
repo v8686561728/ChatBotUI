@@ -1,5 +1,6 @@
 import React, { Suspense, useState, useEffect } from "react";
 import { Avatar } from "antd";
+import {RedoOutlined} from "@ant-design/icons";
 import parse from "html-react-parser";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/chatScreen.css";
@@ -227,22 +228,29 @@ const ChatScreen = () => {
                   </div>
                 </div>
               </div>
+              <div>
               <CustomScrollbars className="gx-chat-list-scroll">
                 <Conversation
                   conversationData={conversationData}
                   handleInputSubmit={handleInputSubmit}
                   handleOptionClick={handleOptionClick}
                 />
+              
               </CustomScrollbars>
-
-              <div className="gx-chat-main-footer">
+              <div className="gx-chat-main-footer"    style={
+                        settings && {
+                          backgroundColor: settings.color.headerBackgroundColor,
+                        }
+                      }>
                 <div className="gx-flex-row gx-align-items-center">
                   <div className="gx-col">
-                    <div className="gx-form-group" onClick={handleReset}>
-                      Restart conversation
+                    <div className="gx-form-group gx-restart" onClick={handleReset}>
+                    <RedoOutlined />  Restart conversation
                     </div>
                   </div>
                 </div>
+              </div>
+         
               </div>
             </div>
           </Suspense>

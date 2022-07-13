@@ -30,6 +30,7 @@ const Conversation = React.lazy(() =>
 const ChatScreen = () => {
   const [chatOpen, setChatOpen] = useState(false); // controls modal open/close
   const messagesEndRef = useRef();
+  const [conversationLoading, setConversationLoading] = useState(false);
   const [isSubScriptionComplete, setIsSubScriptionComplete] = useState(false);
   const dispatch = useDispatch();
   const conversationData = useSelector((state) => getConversation(state));
@@ -72,7 +73,9 @@ const ChatScreen = () => {
           channelName: channelId,
         });
       }
+
       channel.bind("server-message", (data) => {
+        setConversationLoading(false)
         const result = generateConveration([], data.messages);
         dispatch(addMessageToConversation(result));
         const { component } =
@@ -85,7 +88,9 @@ const ChatScreen = () => {
             senderId: userId,
             channelName: channelId,
           });
+          setConversationLoading(true)
         }
+        
       });
     }
   }, [isSubScriptionComplete]);
@@ -126,7 +131,8 @@ const ChatScreen = () => {
       .forEach((el) => el.remove());
 
     dispatch(addMessageToConversation([message]));
-    channel.trigger("client-widget-message", eventData);
+    channel.trigger("client-widget-message", eventData)
+    setConversationLoading(true)
   };
 
   // triggers an client event when input is submitted
@@ -158,7 +164,8 @@ const ChatScreen = () => {
         channelId: channelId,
       },
     };
-    channel.trigger("client-widget-message", eventData);
+    channel.trigger("client-widget-message", eventData)
+    setConversationLoading(true)
   };
 
   // handles chat model open and close
@@ -186,7 +193,8 @@ const ChatScreen = () => {
     };
     const message = [{ type: "sent", text: "@Discuter" }];
     dispatch(addMessageToConversation(message));
-    channel.trigger("client-widget-message", eventData);
+    channel.trigger("client-widget-message", eventData)
+    setConversationLoading(true)
   };
   return (
     !loading && (
@@ -240,10 +248,10 @@ const ChatScreen = () => {
                       handleInputSubmit={handleInputSubmit}
                       handleOptionClick={handleOptionClick}
                     />
-                    <LoadingOutlined />
-                     <div ref={messagesEndRef} />
+                   { conversationLoading && <LoadingOutlined className="conv-loading"/>}
+                   <div ref={messagesEndRef} />
                   </CustomScrollbars>
-                 
+                  
                   <div
                     className="gx-chat-main-footer"
                     style={

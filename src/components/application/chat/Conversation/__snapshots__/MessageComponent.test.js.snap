@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message component renders correctly 1`] = `
+<div
+  className="gx-bubble-block"
+>
+  <div
+    className="gx-bubble"
+  >
+    <div
+      className="gx-message"
+    >
+      message sent
+    </div>
+    <div
+      className="gx-time gx-text-muted gx-text-right gx-mt-2"
+    >
+      now
+    </div>
+  </div>
+</div>
+`;

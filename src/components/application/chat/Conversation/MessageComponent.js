@@ -71,13 +71,14 @@ const MessageComponent = ({ data, conversation }) => {
             <div className="gx-input-label">{conversation.text}</div>
 
             <Input
+            data-testid="input"
               onChange={handleChange}
               readOnly={readOnly}
               addonAfter={
                 readOnly ? (
-                  <CheckOutlined />
+                  <CheckOutlined data-testid="save"/>
                 ) : (
-                  <SendOutlined onClick={handleInput} />
+                  <SendOutlined data-testid="send" onClick={handleInput} />
                 )
               }
             ></Input>

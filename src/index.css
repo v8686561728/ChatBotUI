@@ -29974,3 +29974,6 @@ h6,
 .icon-sent:before {
   content: "\e074";
 }
+body{
+background-color: transparent;
+}

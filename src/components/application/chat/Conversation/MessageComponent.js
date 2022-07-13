@@ -81,7 +81,7 @@ const MessageComponent = ({ data, conversation }) => {
           <div className="gx-bubble">
             <div className="gx-input-label">{conversation.text}</div>
         
-                <Input onChange={handleChange} addonAfter={readOnly?<CheckOutlined />:<SendOutlined onClick={handleInput}/>}></Input>
+                <Input onChange={handleChange} readOnly={readOnly} addonAfter={readOnly?<CheckOutlined />:<SendOutlined onClick={handleInput}/>}></Input>
                
             <span className="error" data-testid="error">
               {error}

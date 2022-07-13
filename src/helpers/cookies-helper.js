@@ -6,7 +6,7 @@ export const setCookie = (c_name, value, expiredays) => {
     "=" +
     value +
     ";path=/" +
-    (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
+    (expiredays == null ? "" : ";expires=" + exdate.toGMTString())+";SameSite=None; Secure";
 };
 export const getCookie = (name) => {
   var dc = document.cookie;

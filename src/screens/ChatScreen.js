@@ -9,6 +9,7 @@ import "../styles/badge.css";
 import {
   addMessageToConversation,
   createChannel,
+  updateUserId,
 } from "../redux/chat/chat-actions";
 import {
   getChannel,
@@ -45,7 +46,8 @@ const ChatScreen = () => {
   // getting inital data of conversation
   useEffect(() => {
     const user = getCookie("user-id"); // to retrive previous message of the conversation
-    dispatch(createChannel(user)); // pusher channel creation
+    user && dispatch(updateUserId(user));
+    dispatch(createChannel()); // pusher channel creation
   }, []);
   useEffect(() => {
     setCookie("user-id", userId); // saving the user id in cookies

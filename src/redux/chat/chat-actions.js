@@ -38,13 +38,12 @@ export const addMessageToConversation = (data) => {
   };
 };
 
-export const createChannel = (userid) => {
+export const createChannel = () => {
   return async (dispatch) => {
     try {
       const { data } = await api({
         method: "GET",
         url: config.USER_ID_API,
-        ...(userid && { headers: { userid } }),
       });
       dispatch(updateUserId(data.user.id));
       dispatch(updateChannelId(data.channelId));
@@ -52,7 +51,6 @@ export const createChannel = (userid) => {
       const initialData = await api({
         method: "GET",
         url: config.INITIAL_DATA_URL + `/${data.channelId}`,
-        headers: { userid: data.user.id },
       });
       dispatch(setInitialData(data));
       dispatch(

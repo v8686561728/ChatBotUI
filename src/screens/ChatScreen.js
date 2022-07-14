@@ -68,7 +68,7 @@ const ChatScreen = () => {
   // Binding client and server events
   useEffect(() => {
     if (isSubScriptionComplete) {
-      if (conversationData.length == 1) {
+      if (conversationData.length == 1 || (conversationData.length>0 && conversationData[conversationData.length-1].type==='recieved')) {
         channel.trigger("client-widget-message", {
           message: {
             lastMessageTimeStamp: new Date().getTime(),
@@ -77,7 +77,6 @@ const ChatScreen = () => {
           channelName: channelId,
         });
       }
-
       channel.bind("server-message", (data) => {
         setConversationLoading(false)
         const result = generateConveration([], data.messages);

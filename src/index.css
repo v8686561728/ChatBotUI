@@ -29977,3 +29977,9 @@ h6,
 body{
 background-color: transparent;
 }
+.loading-content{
+  min-height: 350px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}

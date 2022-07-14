@@ -211,7 +211,7 @@ const ChatScreen = () => {
         )}
         {chatOpen ? (
           <div className="container">
-            <Suspense fallback={<>Loading...</>}>
+           
               <div className="gx-chat-container">
                 <div className="gx-chat-main-header">
                     <div className=" gx-chat-avatar gx-mr-2">
@@ -238,7 +238,8 @@ const ChatScreen = () => {
                       </div>
                     </div>
                 </div>
-                <div>
+                
+                <Suspense fallback={ <LoadingOutlined className="loading-content"/>}>
                   <CustomScrollbars className="gx-chat-list-scroll">
                     <Conversation
                       conversationData={conversationData}
@@ -248,7 +249,8 @@ const ChatScreen = () => {
                    { conversationLoading && <LoadingOutlined className="conv-loading"/>}
                    <div ref={messagesEndRef} />
                   </CustomScrollbars>
-                  
+                  </Suspense>
+                
                   <div
                     className="gx-chat-main-footer"
                     style={
@@ -268,9 +270,10 @@ const ChatScreen = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                
+               
               </div>
-            </Suspense>
+            
           </div>
         ) : (
           <div
